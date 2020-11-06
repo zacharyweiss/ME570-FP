@@ -1,0 +1,102 @@
+* Path planning based on ADMM optimization
+  Use a relatively new method for constrained optimization, called Alternating Direction Method of Multipliers (ADMM), for planning application
+  - add random sampling to escape local minima during optimization
+  - consider version where obstacles can be only sampled
+  - Experimental low-rank ADMM formulation (some code available)
+    - use it for planning motion of single/multiple agents with visibility constraints
+    - use it for inverse kinematics
+
+* Map generator
+  Create realistic environments for testing path planning algorithms
+  - Different scales: Room vs building (house vs offices) vs city block vs city
+  - Learn generation parameters from data
+
+* Multi-agent systems
+  Planning for systems with multiple agents
+  - path planning where the map is split across multiple agents, possibly with different resolutions
+  - broadcast-control (a single control input is given to all agents at once). Existing techniques essentially reduce to controlling linear systems. These are the variations that would need to be tried
+    - allow uncertainty in actuation/sensing
+    - allow and use collision of a few agents with obstacles
+    - use of differential flatness (which is a way to plan a dynamically feasible trajectory by considering only a subset of the states).
+  - with mutually exclusive constraints
+** Vision-related
+   - Planning with a defensive line-of-sight or connectivity maintenance (imagine one or multiple robots that move in order to maintain visibility on one or multiple targets that can move unpredictably)
+
+* Rotation localization from directions only
+  - Derive statistically first-order-optimal distributed estimation algorithms by extending current state of the art (Leonardos, Tron, CDC19)
+
+* Planning with moving platforms
+  Modify algorithms to solve games like Super Mario or Frogger, where the configuration space contains moving free space (instead of moving obstacles).
+
+* Visual homing
+  - implementation on a iCreateor or quadrotor
+  - with non-trivial dynamics (e.g., a robot arm)
+    - with second-order dynamics
+    - implementation on Baxter
+  - Planning a path where you need to track a (time-varying) set of points in the enviroment in order to identify your location. That is, planning on how to swap points in this set.
+
+* Computer vision applications
+  - Jigsaw solving
+    - Add the use of computer vision for solving real puzzles.
+  - Image resizing by seam carving using heuristic search.
+    - With "objectness"-derived costs
+
+* Non-conventional configuration spaces
+** Ropes under gravity
+** Rotations
+   Planning for rotations of rigid bodies with non-identity moment of inertia
+   - control with torque inputs
+   - achieve desired periodic motions
+   - derive inertia-aware exponential map (some initial work available)
+** Under orbital dynamics
+   "Straight lines" are orbits. See also https://aerospace.org/sites/default/files/2020-10/Reesman_PhysicsWarSpace_20201001.pdf.
+** Construction/Building
+   Build a castle-like structure using blocks and simple building rules (blocks cannot be mid-air, you can use arches). Make the solution faster by identifying modular structures.
+** Relativity
+   Path planning and special/general relativity: Concept paper on what are the implications of finite speed of multi-agent movement/communication in networked environment.
+
+* Pursuit-evasion games
+  - with slow-down barriers (some initial ideas available)
+  - include learning for partially unknown maps
+  - with changing map (opening/closing doors)
+  - include learning to predict evader's behavior
+** Vision-related
+   - Visibility-based with limited and rotating field of view
+
+* Path planning for multi-hypothesis tracking
+  - See decoding of best hypothesis as a shortest-path problem
+    - See effect of limiting tracking history/back-tracking
+
+* Sampling-based algorithms
+  - Mixed with trajectory refinement (direct optimization)
+    - Alternating :: update tree using direct optimization, but optimization can only use samples
+    - Parallel :: similar to PTAM but for planning: a front-end with sampling, a back-end with refinement
+  - Sampling strategies
+    - Rejection sampling
+      - Using repulsive potentials for the rejection probability
+      - Using Control Barrier Functions (a state-of-the-art framework representing the evolution of potential-based methods) to better balance moving toward the goal and avoiding going near obstacles.
+      - uses Hamiltonian dynamics (inspired by Hamiltonian Monte Carlo Methods).
+      - learned value of samples (look at Beomjoon Kim, Leslie Pack Kaelbling, and Toma's Lozano-Perez. Learning to guide task and motion planning using score-space representation. ICRA17)
+        - to choose where to extend tree
+        - to bias generation of new samples
+        - in partially known maps to incorporate prior on obstacle shapes
+  - Planning with a predefined time budget (pre-emptive RRT, inspired by pre-emptive RANSAC)
+  - With unknown and/or stochastic dynamics, link with reinforcement learning
+  - Relation with reinforcement learning: what if transition of state given by actions is stochastic?
+    - Planning in reverse?
+    - Local smoothing?
+** Machine learning application
+   - Application to estimation of finite-time reachability region for nonlinear systems
+   - Given a neural networks with ReLU nonlinearities, and an example input, compute a set of points that give the same output.
+
+* Extensions of A*
+  - planning with uncertainty in moving cost or actuators
+  - New forms of heuristics
+    - from convolutions (CNNs,but this would be slow for high-dim spaces)
+    - from eigenvectors of graph Laplacian/random walk prior
+      - for unknown and/or modular environments (use approximate compositionality of graph eigenvectors inspired by spectral clustering)
+  - Random sub-sampling of what neighbors to expand
+** Machine learning application
+
+* Mapping
+  - with discrete optimization techniques
