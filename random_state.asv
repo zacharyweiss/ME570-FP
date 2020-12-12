@@ -1,5 +1,0 @@
-function xRand = random_state(world)
-    xMin = ;
-    xMax = ;
-    xRand = random('uniform',xMin,xMax);
-end
