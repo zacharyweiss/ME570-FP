@@ -1,0 +1,12 @@
+function rrt_plot(world,tree)
+%RRT_PLOT Summary of this function goes here
+%   Detailed explanation goes here
+    polygonworld_draw(world,tree(0).x)
+    
+    while ~empty(idxChildren)
+        tree_plotChild(tree,idxChildren(1))
+        
+    for iRootChild = 1:numel(tree(0).children)
+        tree_plotChild(tree,iRootChild)
+end
+
