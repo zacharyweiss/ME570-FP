@@ -5,10 +5,10 @@ function tree = rrt_generate(world,xStart,k,deltaT)
         while ~isValidConfig
             xRand = state_random(world);
             idxNear = nearest_neighbor(tree,xRand);
-            u = select_input(xRand,tree(idxNear).x);
+            u = select_input(xRand,tree(idxNear).x,deltaT);
             xNew = state_new(tree(idxNear).x,u,deltaT);
-            isValidConfig = state_new_isValid(world,xNew);
+            isValidConfig = state_new_isValid(world,xNew,tree(idxNear).x);
         end
-        tree = tree_makeChild(tree,iVertex,idxNear);
+        tree = tree_makeChild(tree,iVertex,xNew,idxNear);
     end
 end
