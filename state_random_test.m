@@ -1,4 +1,4 @@
-function random_state_test()
+function state_random_test()
     load polygonWorld.mat
     for i = 1:10
         figure(i)

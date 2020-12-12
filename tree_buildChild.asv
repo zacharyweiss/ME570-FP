@@ -1,0 +1,7 @@
+function [outputArg1,outputArg2] = tree_buildChild(tree,inputArg2)
+    tree(iVertex).x = xNew;
+    tree(iVertex).edge = xNew - tree(idxNear).x;
+    tree(iVertex).parent = idxNear;
+    tree(idxNear).children = [tree(idxNear).children iVertex];
+end
+

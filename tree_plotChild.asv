@@ -1,7 +1,0 @@
-function idxSubChildren = tree_plotChild(tree,idxChild)
-    hold on
-    quiver(tree(idxChild).edge)
-    
-    plot(xChild(1),xChild(2))
-end
-

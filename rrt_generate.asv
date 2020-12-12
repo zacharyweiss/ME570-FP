@@ -1,10 +1,11 @@
-function tree = generate_rrt(world,xStart,k,deltaT)
+function tree = rrt_generate(world,xStart,k,deltaT)
     tree = tree_initialize(xStart,k);
-    for vertex = 1:k
+    for iVertex = 2:k
         xRand = random_state(world);
         idxNear = nearest_neighbor(tree,xRand);
-        u = select_input(world,xRand,idxNear);
-        xNew = new_state(treidxNear,u,deltaT);
+        u = select_input(xRand,tree(idxNear).x);
+        xNew = new_state(tree(idxNear).x,u,deltaT);
+        tree(iVertex)
         tree = tree_addVertex(tree,xNew);
         tree = tree_addEdge(tree,idxNear,xNew,u);
     end
