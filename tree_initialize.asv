@@ -1,6 +1,0 @@
-function tree = tree_initialize(xStart,k)
-    tree = repmat(struct('parent',[],'children',[],'edge',[],'x',[],'obs',struct('nodes',0,'dist',0,'col',0)),k,1);
-    tree(1).parent = 0;
-    tree(1).x = xStart;
-    tree(1).
-end
