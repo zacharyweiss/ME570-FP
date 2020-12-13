@@ -7,6 +7,6 @@ function tree = tree_makeChild(tree,iVertex,xNew,idxNear)
     % observations
     tree(iVertex).obs.nodes = tree(idxNear).obs.nodes + 1;
     tree(iVertex).obs.dist = tree(idxNear).obs.dist + norm(tree(iVertex).edge);
-    tree(iVertex).obs.col = tree(idxNear).obs.col;
+    tree(iVertex).obs.col = tree(iVertex).obs.col
 end
 
