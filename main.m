@@ -1,5 +1,5 @@
 % load world
-load polygonWorld.mat
+load('polygonWorld.mat','world','xGoal','xStart')
 
 % settings
 nVerts = 500;   % number of vertices to build tree to
