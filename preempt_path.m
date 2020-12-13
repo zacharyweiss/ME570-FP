@@ -1,4 +1,4 @@
-function xPath = preempt_path(tree)
+function xPath = preempt_path(tree,xGoal)
     idxHypotheses = preempt_hypotheses(tree);
     % plot leaves
     hypoX = [tree(idxHypotheses).x];

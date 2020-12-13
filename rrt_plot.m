@@ -1,4 +1,7 @@
 function rrt_plot(world,tree)
+    clf
+    axis equal
+    
     polygonworld_draw(world,tree(1).x)
     
     hold on
