@@ -5,9 +5,10 @@ function u = select_input(xRand,xNear,deltaT)
 % To modify for nonholonomic, one must consider what u satisfies 
 % x_dot = f(x,u) S.T. on integration it will move the system towards xRand
     vec = xRand-xNear;
+    norm(vec)
     u = vec/norm(vec);
     % if point is <deltaT away from node, make u proportional to distance
-    if u*deltaT > norm(vec)
+    if deltaT > norm(vec)
         u = vec/deltaT;
     end
 end

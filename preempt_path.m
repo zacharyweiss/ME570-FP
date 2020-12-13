@@ -1,5 +1,5 @@
 function preempt_path()
-    nVerts = 250;
+    nVerts = 500;
     deltaT = 0.1;
     
     load polygonWorld.mat
