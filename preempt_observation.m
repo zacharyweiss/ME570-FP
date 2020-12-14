@@ -5,6 +5,9 @@ function observes = preempt_observation(tree,idxHypotheses,xGoal)
     observes = repmat(struct('idxHyp',[],'str',[],'col',[],'dGoal',[],'nNode',[]),nObs,1);
     
     dStartToGoal = norm(xGoal-tree(1).x);
+    % for normalizing nodecount between 0 and 1
+    nodeObs = [tree(idxHypotheses).obs];
+    maxNodes = max([nodeObs.nodes]);
     
     for iObs = 1:nObs
         % including node / hypothesis index in tree for easy referencing
@@ -21,15 +24,17 @@ function observes = preempt_observation(tree,idxHypotheses,xGoal)
         % proportional to dist to goal normalized by path length. Takes on
         % between [-1,1] with 1 being most optimal.
         observes(iObs).str = (dStartToGoal-dNodeToGoal)/pathLen;
+        % map to [0,1]
+        observes(iObs).str = (observes(iObs).str+1)/2;
         
         % collisions normalized by total attempted expansions along path,
         % represented by sum of nodes and failed node attempts off of nodes
         % on path. Takes on between [0,1) with 0 most optimal.
-        observes(iObs).col = collisions/(nNodes+collisions);
+        observes(iObs).col = 1-(collisions/(nNodes+collisions));
         
-        observes(iObs).dGoal = dNodeToGoal;
+        observes(iObs).dGoal = 1-(dNodeToGoal/dStartToGoal);
         
-        observes(iObs).nNode = nNodes;
+        observes(iObs).nNode = nNodes/maxNodes;
     end
     
     % randomly permute set of observations before returning

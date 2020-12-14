@@ -11,9 +11,9 @@ tree = rrt_generate(world,xStart(:,iStart),nVerts,deltaT);
 % plot RRT and polygonal world
 rrt_plot(world,tree)
 
-% % find preemptive best path at time of nVerts cutoff
-% xPath = preempt_path(tree,xGoal);
-% % overlay path and goal on plot
-% hold on
-% plot(xPath(1,:),xPath(2,:),'g-')
-% plot(xGoal(1),xGoal(2),'rx')
+% find preemptive best path at time of nVerts cutoff
+xPath = preempt_path(tree,xGoal);
+% overlay path and goal on plot
+hold on
+plot(xPath(1,:),xPath(2,:),'g-')
+plot(xGoal(1),xGoal(2),'rx')
