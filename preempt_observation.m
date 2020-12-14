@@ -30,8 +30,11 @@ function observes = preempt_observation(tree,idxHypotheses,xGoal)
         % collisions normalized by total attempted expansions along path,
         % represented by sum of nodes and failed node attempts off of nodes
         % on path. Takes on between [0,1) with 0 most optimal.
+        % remapped to (0,1] with 1 being most optimal.
         observes(iObs).col = 1-(collisions/(nNodes+collisions));
         
+        % distance to goal normalized by initial distance to goal, remapped
+        % to between [0,1] with 1 being best.
         observes(iObs).dGoal = 1-(dNodeToGoal/dStartToGoal);
         if observes(iObs).dGoal<0
             observes(iObs).dGoal = 0;

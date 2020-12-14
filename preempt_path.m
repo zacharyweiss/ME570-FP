@@ -19,10 +19,10 @@ function xPath = preempt_path(tree,xGoal)
     while iter<=nHyp && f_i~=1
         % reorder hypotheses by L_(i-1), keep f(i) of them
         [~,L_order] = sort(L_hyp,'descend');
-        L_hyp(setdiff(1:nHyp,L_order)) = -Inf;
         if numel(L_order)>f_i
             L_order(f_i+1:end) = [];
         end
+        L_hyp(setdiff(1:nHyp,L_order)) = -Inf;
         
         % compute scores L_i(h) = L_(i-1) + rho(i,h) for all hypotheses
         % remaining
@@ -32,7 +32,7 @@ function xPath = preempt_path(tree,xGoal)
         iter = iter + 1;
         f_i = preempt_function(iter,nHyp,5);
     end
-    idxBest = L_order(1);
+    idxBest = idxHypotheses(L_order(1));
     
     % generate path vector from index of leaf node
     xPath = tree_path(tree,idxBest);
