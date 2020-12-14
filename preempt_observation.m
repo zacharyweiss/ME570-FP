@@ -33,6 +33,9 @@ function observes = preempt_observation(tree,idxHypotheses,xGoal)
         observes(iObs).col = 1-(collisions/(nNodes+collisions));
         
         observes(iObs).dGoal = 1-(dNodeToGoal/dStartToGoal);
+        if observes(iObs).dGoal<0
+            observes(iObs).dGoal = 0;
+        end
         
         observes(iObs).nNode = nNodes/maxNodes;
     end

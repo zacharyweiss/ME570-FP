@@ -6,8 +6,6 @@ function hypLogLikely = preempt_score(hypotheses,observations,remainingHyp,idxOb
     nRHyp = numel(remainingHyp);
     likely = @(c,obs,hyp) coeff(c)*(cdf(pd,hyp)-cdf(pd,obs));
     
-    
-    
     hypLogLikely = zeros(1,nRHyp);
     for iRHyp = 1:nRHyp
         iHyp = hypotheses(remainingHyp(iRHyp));
@@ -16,7 +14,13 @@ function hypLogLikely = preempt_score(hypotheses,observations,remainingHyp,idxOb
         lDGoal = likely(1,observations(idxObs).dGoal,observations(iHyp==[observations.idxHyp]).dGoal);
         lNNode = likely(1,observations(idxObs).nNode,observations(iHyp==[observations.idxHyp]).nNode);
         
-        hypLogLikely(iRHyp) = log(lStr+lCol+lDGoal+lNNode);
+        if lStr+lCol+lDGoal+lNNode>=0
+            hypLogLikely(iRHyp) = log(lStr+lCol+lDGoal+lNNode);
+        elseif lStr+lCol+lDGoal+lNNode<0
+            hypLogLikely(iRHyp) = -log(-lStr-lCol-lDGoal-lNNode);
+        else
+            error('LogLikelihood error')
+        end
     end
 end
 

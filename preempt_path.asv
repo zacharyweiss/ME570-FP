@@ -15,11 +15,13 @@ function xPath = preempt_path(tree,xGoal)
     L_hyp = preempt_score(idxHypotheses,observes,L_order,1);
     
     iter = 2;
-    while iter<=nHyp && preempt_function(iter,nHyp,1)~=1
+    f_i = preempt_function(iter,nHyp,5);
+    while iter<=nHyp && f_i~=1
         % reorder hypotheses by L_(i-1), keep f(i) of them
-        [~,L_order] = sort(L_hyp(sort(L_order)),'descend');
-        if numel(L_order)>preempt_function(iter,nHyp,1)
-            L_order(preempt_function(iter,nHyp,1)+1:end) = [];
+        [~,L_order] = sort(L_hyp,'descend');
+        if numel(L_order)>f_i
+            L_hyp(~(L_order==1:nHyp)) = -Inf;
+            L_order(f_i+1:end) = [];
         end
         
         % compute scores L_i(h) = L_(i-1) + rho(i,h) for all hypotheses
@@ -28,6 +30,7 @@ function xPath = preempt_path(tree,xGoal)
         
         % increment iteration
         iter = iter + 1;
+        f_i = preempt_function(iter,nHyp,5);
     end
     idxBest = L_order(1);
     

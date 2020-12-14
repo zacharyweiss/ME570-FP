@@ -4,19 +4,21 @@ function hypLogLikely = preempt_score(hypotheses,observations,remainingHyp,idxOb
     coeff = [0.5 0.5 0 0];
     pd = makedist('Beta','a',4,'b',4);
     nRHyp = numel(remainingHyp);
-    likely = @(c,obs,hyp) coeff(c)*(hyp(pd,hyp)-cdf(pd,obs));
+    likely = @(c,obs,hyp) coeff(c)*(cdf(pd,hyp)-cdf(pd,obs));
     
     
     
-    hypLogLikely = zeros(1,numel(remainingHyp)
-    for iRHyp = 1:numel(remainingHyp)
+    hypLogLikely = zeros(1,nRHyp);
+    for iRHyp = 1:nRHyp
         iHyp = hypotheses(remainingHyp(iRHyp));
-        lStr = likely(1,observations(idxObs).str,observations(iHyp).str);
-        lCol = likely(1,observations(idxObs).col,observations(iHyp).col);
-        lDGoal = likely(1,observations(idxObs).dGoal,observations(iHyp).dGoal);
-        lNNode = likely(1,observations(idxObs).nNode,observations(iHyp).nNode);
+        lStr = likely(1,observations(idxObs).str,observations(iHyp==[observations.idxHyp]).str);
+        lCol = likely(1,observations(idxObs).col,observations(iHyp==[observations.idxHyp]).col);
+        lDGoal = likely(1,observations(idxObs).dGoal,observations(iHyp==[observations.idxHyp]).dGoal);
+        lNNode = likely(1,observations(idxObs).nNode,observations(iHyp==[observations.idxHyp]).nNode);
         
-        hypLogLikely = log(lStr+lCol+lDGoal+lNNode);
+        if lStr+lCol+lDGoal+lNNode>0
+            hypLogLikely(iRHyp) = log(lStr+lCol+lDGoal+lNNode);
+            e
     end
 end
 
