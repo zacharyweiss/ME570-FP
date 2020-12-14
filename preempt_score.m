@@ -1,7 +1,7 @@
 function hypLogLikely = preempt_score(hypotheses,observations,remainingHyp,idxObs)
 % must return log likelyhoods in order defined by remainingHyp (L_order in
 % preempt_path.m)
-    coeff = [.5 .1 .4 0];
+    coeff = [.25 .25 .25 .25];
     pd = makedist('Beta','a',1,'b',1);
     nRHyp = numel(remainingHyp);
     likely = @(c,obs,hyp) coeff(c)*(cdf(pd,hyp)-cdf(pd,obs));

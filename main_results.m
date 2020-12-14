@@ -2,9 +2,9 @@
 load('polygonWorld.mat','world','xGoal','xStart')
 
 % settings
-nVerts = 300;   % number of vertices to build tree to
+nVerts = 200;   % number of vertices to build tree to
 deltaT = 0.05;   % stepsize of tree
-iStart = 2;     % start position, anywhere from 1-5
+iStart = 1;     % start position, anywhere from 1-5
 
 % generate RRT with observation metrics for preemption
 tree = rrt_generate(world,xStart(:,iStart),nVerts,deltaT);
