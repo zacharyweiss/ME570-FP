@@ -8,7 +8,7 @@ hold on
 for iPoly = 1:nbPolygon
     polygon_plot(world(iPoly).vertices,'k')
 end
-plot(xGoal(1,1),xGoal(2,1),'x','Color','r')
+plot(xGoal(1,1),xGoal(2,1),'o','Color','r')
 if ~flagHold
     hold off
 end

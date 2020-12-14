@@ -8,10 +8,10 @@ function xPath = preempt_path(tree,xGoal)
 %     plot(hypoX(1,:),hypoX(2,:),'o')
     
     % calculate observations (from primitives in tree), permute list
-    observes = preempt_observation(tree,idxHypotheses,xGoal);
+    %observes = preempt_observation(tree,idxHypotheses,xGoal);
     
     % compute scores L_i(h) = rho(1,h) for all hypotheses
-    lHyp = preempt_score(idxHypotheses,observes);
+    %lHyp = preempt_score(idxHypotheses,observes);
     
     iter = 2;
     while iter<=nHyp && preempt_function(iter,nHyp,1)~=1
@@ -24,7 +24,7 @@ function xPath = preempt_path(tree,xGoal)
         % increment iteration
         iter = iter + 1;
     end
-        
+    idxBest = idxHypotheses(end);
     % generate path vector from index of leaf node
     xPath = tree_path(tree,idxBest);
 end
