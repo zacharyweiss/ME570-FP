@@ -2,7 +2,7 @@
 load('polygonWorld.mat','world','xGoal','xStart')
 
 % settings
-nVerts = 250;   % number of vertices to build tree to
+nVerts = 200;   % number of vertices to build tree to
 deltaT = 0.1;   % stepsize of tree
 iStart = 1;     % start position, anywhere from 1-5
 

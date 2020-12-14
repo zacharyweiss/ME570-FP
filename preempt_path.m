@@ -10,7 +10,7 @@ function xPath = preempt_path(tree,xGoal)
     % calculate observations (from primitives in tree), permute list
     observes = preempt_observation(tree,idxHypotheses,xGoal);
     
-    % compute scores L_i(h) = rho(1,h) for all hypotheses
+    % compute scores L_1(h) = rho(1,h) for all hypotheses
     L_hyp = preempt_score(idxHypotheses,observes);
     L_order = 1:nHyp;
     
@@ -22,8 +22,9 @@ function xPath = preempt_path(tree,xGoal)
             L_order(preempt_function(iter,nHyp,1)+1:end) = [];
         end
         
-        % compute scores L_i(h) = rho(1,h) for all hypotheses
-        
+        % compute scores L_i(h) = L_(i-1) + rho(i,h) for all hypotheses
+        % remaining
+        L_hyp(L_order) = L_hyp(L_order) + preempt_score(idxHypotheses,observes,L_order);
         
         % increment iteration
         iter = iter + 1;
