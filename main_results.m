@@ -1,9 +1,9 @@
 % load world
-load('polygonWorld.mat','world','xGoal','xStart')
+load('polygonWorldNonconvex.mat','world','xGoal','xStart')
 
 % settings
 nVerts = 200;   % number of vertices to build tree to before preempting
-deltaT = 0.05;   % stepsize of tree, best on order of 0.01-0.1
+deltaT = 0.08;   % stepsize of tree, best on order of 0.01-0.1
 iStart = 1;      % start position, anywhere from 1-5
 
 % generate RRT with observation metrics for preemption
